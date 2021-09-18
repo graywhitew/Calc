@@ -32,6 +32,7 @@ for i in bttn_list:
 calc_entry = Entry(root, width = 33, font=("Calibri", 45), bg="#000000", fg="#FFFFFF", disabledbackground="#1E6FBA",disabledforeground="yellow",highlightbackground="black",highlightcolor="red",highlightthickness=1,bd=0)
 calc_entry.grid(row = 0, column = 0, columnspan = 5, sticky= 'ew')
 
+#oop
 #логика калькулятора
 def calc(key):
     global memory
@@ -77,16 +78,12 @@ def calc(key):
     elif key == "x^(1/2)":
         calc_entry.insert(END, "=" +str(math.sqrt(int(calc_entry.get()))))   
     elif key == "x^n":
-        stepen = messagebox.askyesno(
-            title = "Ввод значений",
-            message = "Введите степень n"            )
-        if stepen:
-            entrys = Entry()
-            entrys.pack(pady=10)
-            n = entrys.get()
-            entrys.delete(0,END)   
-            label = Label(height= 3)                
-        calc_entry.insert(END, "=" +str(math.pow((int(calc_entry.get()),n))))          
+        stepen = Tk()
+        stepen.title("Ввод степени")
+        calc_stepen = Entry(stepen, width = 20)
+        calc_stepen.grid(row = 0, column = 0, columnspan = 1, sticky= 'ew')
+        tk.Button(stepen, text="Готово", command = lambda: [funcA(calc_entry,calc_stepen), funcB(stepen)] , height = 6, width = 8, font=("Calibri",10)).grid(row = 0, column = 0)  
+                 
     elif key == "(":
         calc_entry.insert(END, "(")
     elif key == ")":
@@ -95,6 +92,11 @@ def calc(key):
         if "=" in calc_entry.get():
             calc_entry.delete(0, END)
         calc_entry.insert(END, key)
-        
+
+def funcA(self,belf):
+       self.insert(END, " = " +str(math.pow(int(self.get()),int(belf.get()))))
+def funcB(gelf):
+       gelf.after(1,gelf.destroy)      
+
 
 root.mainloop()
