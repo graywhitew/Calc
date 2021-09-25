@@ -51,54 +51,83 @@ def calc(key):
             calc_entry.insert(END,"Ошибка!")
             messagebox.showerror("Ошибка!", "Проверьте корректность введённых данных")
     elif key == "C":
-        calc_entry.delete(0, END)
+        Calculator.C(calc_entry)
     elif key == "+-":
-        if "=" in calc_entry.get():
-            calc_entry.delete(0, END)
-        try:
-            if calc_entry.get()[0] == "-":
-                calc_entry.delete(0)
-            else:
-                calc_entry.insert(0, "-")
-        except IndexError:
-            pass                    
+        Calculator.plusminus(calc_entry)                  
     elif key == "Pi":
-        calc_entry.insert(END, math.pi)
+        Calculator.Pi(calc_entry)
     elif key == "Exit":
-        root.after(1,root.destroy)
-        sys.exit
+        Calculator.Exit(root)
     elif key == "x^2":
-        calc_entry.insert(END, "**")
+        Calculator.Quadr(calc_entry)
     elif key == "sin":
-        calc_entry.insert(END, "=" +str(math.sin(int(calc_entry.get()))))
+        Calculator.Sin(calc_entry)
     elif key == "cos":
-        calc_entry.insert(END, "=" +str(math.cos(int(calc_entry.get())))) 
+        Calculator.Cos(calc_entry)
     elif key == "n!":
-        calc_entry.insert(END, "=" +str(math.factorial(int(calc_entry.get()))))       
+        Calculator.Factorial(calc_entry)
     elif key == "x^(1/2)":
-        c=math.sqrt(int(int(calc_entry.get())))
-        calc_entry.insert(END, "^(1/2)")
-        calc_entry.insert(END, "=" +str(c))   
+        Calculator.Sqrt(calc_entry)  
     elif key == "x^n":
-        stepen = Tk()
-        stepen.title("Ввод степени")
-        calc_stepen = Entry(stepen, width = 20)
-        calc_stepen.grid(row = 0, column = 0, columnspan = 1)
-        tk.Button(stepen, text="Готово", command = lambda: [funcApow(calc_entry,calc_stepen), funcB(stepen)] , height = 3, width = 8, font=("Calibri",10)).grid(row = 1, column = 0)  
+        Calculator.Pow(calc_entry)
     elif key == "e^x":
-        exp = Tk()
-        exp.title("Ввод степени экспоненты")
-        calc_exp = Entry(exp, width = 20)
-        calc_exp.grid(row = 0, column = 0, columnspan = 1)
-        tk.Button(exp, text="Готово", command = lambda: [funcAexp(calc_entry,calc_exp), funcB(exp)] , height = 3, width = 8, font=("Calibri",10)).grid(row = 1, column = 0)              
+        Calculator.Ex(calc_entry)    
     elif key == "(":
-        calc_entry.insert(END, "(")
+        Calculator.LeftBracket(calc_entry)
     elif key == ")":
-        calc_entry.insert(END, ")")    
+        Calculator.RightBracket(calc_entry)   
     else:
         if "=" in calc_entry.get():
             calc_entry.delete(0, END)
         calc_entry.insert(END, key)
+
+
+class Calculator():
+    def C(entry):
+        entry.delete(0, END)
+    def plusminus(entry):
+        if "=" in entry.get():
+            entry.delete(0, END)
+        try:
+            if entry.get()[0] == "-":
+                entry.delete(0)
+            else:
+                entry.insert(0, "-")
+        except IndexError:
+            pass                    
+    def Pi(entry):
+        entry.insert(END, math.pi)
+    def Exit(Table):
+        Table.after(1,Table.destroy)
+        sys.exit
+    def Quadr(entry):
+        entry.insert(END, "**")
+    def Sin(entry):
+        entry.insert(END, "=" +str(math.sin(int(entry.get()))))
+    def Cos(entry):
+        entry.insert(END, "=" +str(math.cos(int(entry.get())))) 
+    def Factorial(entry):
+        entry.insert(END, "=" +str(math.factorial(int(entry.get()))))       
+    def Sqrt(entry):
+        c=math.sqrt(int(int(entry.get())))
+        entry.insert(END, "^(1/2)")
+        entry.insert(END, "=" +str(c))   
+    def Pow(entry):
+        stepen = Tk()
+        stepen.title("Ввод степени")
+        calc_stepen = Entry(stepen, width = 20)
+        calc_stepen.grid(row = 0, column = 0, columnspan = 1)
+        tk.Button(stepen, text="Готово", command = lambda: [funcApow(entry,calc_stepen), funcB(stepen)] , height = 3, width = 8, font=("Calibri",10)).grid(row = 1, column = 0)  
+    def Ex(entry):
+        exp = Tk()
+        exp.title("Ввод степени экспоненты")
+        calc_exp = Entry(exp, width = 20)
+        calc_exp.grid(row = 0, column = 0, columnspan = 1)
+        tk.Button(exp, text="Готово", command = lambda: [funcAexp(entry,calc_exp), funcB(exp)] , height = 3, width = 8, font=("Calibri",10)).grid(row = 1, column = 0)              
+    def LeftBracket(entry):
+        entry.insert(END, "(")
+    def RightBracket(entry):
+        entry.insert(END, ")")    
 
 def funcApow(self,belf):
     #self.insert(END," ^ "+str(belf.get()))
@@ -110,8 +139,7 @@ def funcAexp(self,belf):
     self.insert(END, " = " +str(math.exp(int(belf.get()))))      
 def funcB(gelf):
     gelf.after(1,gelf.destroy)   
-
-       
+    
 
 
 root.mainloop()
