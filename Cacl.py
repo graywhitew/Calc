@@ -76,8 +76,9 @@ def calc(key):
     elif key == "n!":
         calc_entry.insert(END, "=" +str(math.factorial(int(calc_entry.get()))))       
     elif key == "x^(1/2)":
+        c=math.sqrt(int(int(calc_entry.get())))
         calc_entry.insert(END, "^(1/2)")
-        calc_entry.insert(END, "=" +str(math.sqrt(int(int(calc_entry.get())))))   
+        calc_entry.insert(END, "=" +str(c))   
     elif key == "x^n":
         stepen = Tk()
         stepen.title("Ввод степени")
