@@ -7,6 +7,9 @@ import tkinter.font as tkFont
 import math
 import sys
 
+
+#Setting.NewWindow(root,'950x650',"Калькулька")
+
 root = Tk()
 root.geometry('950x650')
 root.title("Калькулька")
@@ -119,6 +122,7 @@ class Calculator():
         calc_stepen.grid(row = 0, column = 0, columnspan = 1)
         tk.Button(stepen, text="Готово", command = lambda: [funcApow(entry,calc_stepen), funcB(stepen)] , height = 3, width = 8, font=("Calibri",10)).grid(row = 1, column = 0)  
     def Ex(entry):
+        #Setting.NewWindow(exp,'950x650',"Калькулька")
         exp = Tk()
         exp.title("Ввод степени экспоненты")
         calc_exp = Entry(exp, width = 20)
@@ -129,8 +133,16 @@ class Calculator():
     def RightBracket(entry):
         entry.insert(END, ")")    
 
+class Setting:
+    def NewWindow(screen,size,text):
+        screen = Tk()
+        screen.geometry(str(size))
+        screen.title(str(text))
+
+
+
+
 def funcApow(self,belf):
-    #self.insert(END," ^ "+str(belf.get()))
     p = math.pow(int(self.get()),int(belf.get()))
     self.insert(END," ^ "+str(belf.get()))
     self.insert(END, "=" +str(p))
@@ -140,6 +152,5 @@ def funcAexp(self,belf):
 def funcB(gelf):
     gelf.after(1,gelf.destroy)   
     
-
 
 root.mainloop()
