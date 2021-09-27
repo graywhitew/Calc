@@ -17,7 +17,7 @@ bttn_list = [
 "7", "8", "9", "+", "*",
 "4", "5", "6", "-", "/",
 "1", "2", "3", "=", "x^n",
-"0", ".", "+-", "C",
+"0", ".", "+-", "C","x^2",
 "Exit", "Pi", "sin", "cos",
 "(",")","n!","x^(1/2)","e^x"]
 
@@ -104,7 +104,9 @@ class Calculator():
         Table.after(1,Table.destroy)
         sys.exit
     def Quadr(entry):
-        entry.insert(END, "**")
+        q=math.pow(int(entry.get()),int(2))
+        entry.insert(END, "^2")
+        entry.insert(END, "=" +str(q))
     def Sin(entry):
         entry.insert(END, "=" +str(math.sin(int(entry.get()))))
     def Cos(entry):
